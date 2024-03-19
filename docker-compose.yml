@@ -1,5 +1,18 @@
-version: '3'
+version: '3.8'
 services:
+  publisher:
+    build: ./publisher
+    ports:
+      - "8080:80"
+    depends_on:
+      - mosquitto
+
+  subscriber:
+    build: ./subscriber
+    ports:
+      - "8081:80"
+    depends_on:
+      - mosquitto
   mosquitto:
     image: eclipse-mosquitto:latest
     ports:
