@@ -13,6 +13,7 @@ services:
       - "8081:80"
     depends_on:
       - mosquitto
+      
   mosquitto:
     image: eclipse-mosquitto:latest
     ports:
@@ -22,3 +23,11 @@ services:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - publisher
+      - subscriber
